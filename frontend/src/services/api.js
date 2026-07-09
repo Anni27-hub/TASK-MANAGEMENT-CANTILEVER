@@ -1,6 +1,10 @@
+let rawApiUrl = import.meta.env.VITE_API_URL || '';
+if (rawApiUrl && !rawApiUrl.endsWith('/api') && !rawApiUrl.endsWith('/api/')) {
+  rawApiUrl = rawApiUrl.replace(/\/$/, '') + '/api';
+}
 const API_BASE = window.location.origin.includes('localhost') 
   ? '/api' 
-  : (import.meta.env.VITE_API_URL || 'https://your-heroku-app.herokuapp.com/api');
+  : rawApiUrl;
 
 // Helper to make request with authentication headers automatically attached
 const request = async (url, options = {}) => {
